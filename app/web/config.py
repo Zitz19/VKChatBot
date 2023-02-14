@@ -39,5 +39,5 @@ def setup_config(app: "Application", config_path: str):
         admin=AdminConfig(
             email=raw_config["admin"]["email"],
             password=raw_config["admin"]["password"],
-        ),
+        )
     )
