@@ -1,7 +1,10 @@
 import typing
 from dataclasses import dataclass
 
+import aiohttp_session
 import yaml
+
+from app.admin.models import Admin
 
 if typing.TYPE_CHECKING:
     from app.web.app import Application
@@ -9,7 +12,8 @@ if typing.TYPE_CHECKING:
 
 @dataclass
 class SessionConfig:
-    pass
+    key: aiohttp_session.SESSION_KEY
+
 
 
 @dataclass
@@ -39,5 +43,6 @@ def setup_config(app: "Application", config_path: str):
         admin=AdminConfig(
             email=raw_config["admin"]["email"],
             password=raw_config["admin"]["password"],
-        )
+        ),
+        session=SessionConfig(key=raw_config['session']['key'])
     )

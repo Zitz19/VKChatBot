@@ -1,6 +1,7 @@
 import json
 import typing
 
+import aiohttp_session
 from aiohttp.web_exceptions import HTTPUnprocessableEntity, HTTPException
 from aiohttp.web_middlewares import middleware
 from aiohttp_apispec import validation_middleware

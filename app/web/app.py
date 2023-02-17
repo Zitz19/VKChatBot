@@ -1,15 +1,18 @@
 from typing import Optional
 
+import aiohttp_session
 from aiohttp.web import (
     Application as AiohttpApplication,
     View as AiohttpView,
     Request as AiohttpRequest,
 )
 from aiohttp_apispec import setup_aiohttp_apispec
+from aiohttp_session.cookie_storage import EncryptedCookieStorage
 
 from app.admin.models import Admin
 from app.base.base_accessor import BaseAccessor
 from app.store import setup_store, Store
+from app.store.admin.accessor import AdminAccessor
 from app.store.database.database import Database
 from app.web.config import Config, setup_config
 from app.web.logger import setup_logging
@@ -21,7 +24,7 @@ class Application(AiohttpApplication):
     config: Optional[Config] = None
     store: Optional[Store] = None
     database: Optional[Database] = None
-    base_accessor: Optional[BaseAccessor] = None
+    accessor: Optional[AdminAccessor] = None
 
 
 class Request(AiohttpRequest):
@@ -54,6 +57,7 @@ def setup_app(config_path: str) -> Application:
     setup_config(app, config_path)
     setup_routes(app)
     setup_aiohttp_apispec(app, title='VKChatBot Application', url='/docs/json', swagger_path='/docs')
+    aiohttp_session.setup(app, EncryptedCookieStorage(app.config.session.key))
     setup_middlewares(app)
     setup_store(app)
     return app
