@@ -1,5 +1,8 @@
+import asyncio
 from asyncio import Task
 from typing import Optional
+
+import aiohttp
 
 from app.store import Store
 
@@ -12,11 +15,16 @@ class Poller:
 
     async def start(self):
         # TODO: добавить asyncio Task на запуск poll
-        raise NotImplementedError
+        self.is_running = True
+        self.poll_task = asyncio.create_task(self.poll())
+        await self.poll_task
 
     async def stop(self):
         # TODO: gracefully завершить Poller
-        raise NotImplementedError
+        self.is_running = False
+        await self.poll_task
 
     async def poll(self):
-        raise NotImplementedError
+        while self.is_running:
+            updates = await self.store.bot.poll()
+            await self.store.bots_manager.handle_updates(updates)

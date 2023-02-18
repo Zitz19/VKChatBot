@@ -24,7 +24,8 @@ class AdminConfig:
 
 @dataclass
 class BotConfig:
-    pass
+    group_token: str
+    group_id: str
 
 
 @dataclass
@@ -44,5 +45,7 @@ def setup_config(app: "Application", config_path: str):
             email=raw_config["admin"]["email"],
             password=raw_config["admin"]["password"],
         ),
-        session=SessionConfig(key=raw_config['session']['key'])
+        session=SessionConfig(key=raw_config['session']['key']),
+        bot=BotConfig(group_token=raw_config['bot']['token'],
+                      group_id=raw_config['bot']['group_id'])
     )
