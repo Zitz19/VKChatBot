@@ -58,6 +58,7 @@ class VkApiAccessor(BaseAccessor):
                                   )
         ) as response:
             json_data = await response.json()
+            print(json_data)
             self.key = json_data['response']['key']
             self.server = json_data['response']['server']
             self.ts = json_data['response']['ts']
@@ -90,6 +91,4 @@ class VkApiAccessor(BaseAccessor):
                                   )
         ) as response:
             self.random_id += 1
-            print(f'HTTP Response Status: {response.status}')
             json_data = await response.json()
-            print(json_data)
