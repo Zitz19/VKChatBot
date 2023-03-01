@@ -6,5 +6,5 @@ admin:
   email: admin@admin.com
   password: admin
 bot:
-  token: vk1.a.3wjlptfS8e3QLcqerf8VhqYjERbpUXWG6g9omgVzjR4hwHXW5D_YbGZtgXAgcSTH2Xajru_ioJ5C-5sAmRlvvHzv0fkUHnDoln2PTYPcEMGnyZEukR6jKgIdm1kBkLYDcdMqIUhqL23VLfyX6Dv-hxl8HY2R4i_HtgTEysHOnDonWJJhiooOcUgX6i85AYwOJkiuWb31ga05Xq7CrjsVOg
+  token: vk_token
   group_id: 218907383
